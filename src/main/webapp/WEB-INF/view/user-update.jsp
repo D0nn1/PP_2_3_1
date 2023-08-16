@@ -67,7 +67,7 @@
 <h2>User Info</h2>
 <br>
 <div class="form-container">
-    <form:form action="saveUpdatedUser" modelAttribute="updatedUser">
+    <form:form action="saveUpdatedUser" method="post" modelAttribute="updatedUser">
         <form:hidden path="id"/>
         <label for="name">Name</label>
         <div class="form-field">

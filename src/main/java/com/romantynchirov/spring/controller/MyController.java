@@ -36,14 +36,14 @@ public class MyController {
         return "redirect:/";
     }
 
-    @RequestMapping("/updateUser")
+    @RequestMapping("/saveUpdatedUser")
     public String saveUpdatedUser(@ModelAttribute("updatedUser") User user) {
         userService.updateUser(user);
-        return "all-users";
+        return "redirect:/";
     }
 
     @RequestMapping("/updateInfo")
-    public String updateUser(@RequestParam("empId") int id, Model model) {
+    public String updateInfo(@RequestParam("empId") int id, Model model) {
         User user = userService.getUser(id);
         model.addAttribute("updatedUser", user);
         return "user-update";
