@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Employee Info</title>
+    <title>User Info</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,10 +49,10 @@
     </style>
 </head>
 <body>
-<h2>Employee Info</h2>
+<h2>User Info</h2>
 <br>
 <div class="form-container">
-    <form:form action="saveEmployee" modelAttribute="employee">
+    <form:form action="saveUser" method="post" modelAttribute="user">
         <form:hidden path="id"/>
         <label for="name">Name</label>
         <div class="form-field">
@@ -73,5 +73,6 @@
         <input type="submit" class="submit-button" value="OK">
     </form:form>
 </div>
+
 </body>
 </html>

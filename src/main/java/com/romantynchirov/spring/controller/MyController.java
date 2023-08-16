@@ -1,55 +1,51 @@
 package com.romantynchirov.spring.controller;
 
-
-import com.romantynchirov.spring.entity.Employee;
+import com.romantynchirov.spring.entity.User;
 import org.springframework.stereotype.Controller;
-import com.romantynchirov.spring.service.EmployeeService;
+import com.romantynchirov.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @Controller
 public class MyController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private UserService userService;
 
-    @RequestMapping("/")
-    public String showAllEmployees(Model model) {
-        List<Employee> allEmployees = employeeService.getAllEmployees();
-        model.addAttribute("allEmps", allEmployees);
-        return "all-employees";
+    @GetMapping("/")
+    public String showAllUsers(Model model) {
+        List<User> allUsers = userService.getAllUsers();
+        model.addAttribute("allEmps", allUsers);
+        return "all-users";
     }
 
-    @RequestMapping("/addNewEmployee")
-    public String addNewEmployee(Model model) {
-        Employee employee = new Employee();
-        employee.setSalary(1000);
-        model.addAttribute("employee", employee);
-        return "employee-info";
+    @GetMapping("/addNewUser")
+    public String addNewUser(Model model) {
+        User user = new User();
+        user.setSalary(1000);
+        model.addAttribute("user", user);
+        return "user-info";
     }
 
-    @RequestMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-        employeeService.saveEmployee(employee);
+    @PostMapping("/saveUser")
+    public String saveUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
         return "redirect:/";
     }
 
-    @RequestMapping("/updateInfo")
-    public String updateEmployee(@RequestParam("empId") int id, Model model) {
-        Employee employee = employeeService.getEmployee(id);
-        model.addAttribute("employee", employee);
-        return "employee-info";
+    @GetMapping("/updateInfo")
+    public String updateUser(@RequestParam("empId") int id, Model model) {
+        User user = userService.getUser(id);
+        model.addAttribute("user", user);
+        return "user-info";
     }
 
-    @RequestMapping("/deleteEmployee")
-    public String deleteEmployee(@RequestParam("empId") int id) {
-        employeeService.deleteEmployee(id);
+    @GetMapping("/deleteUser")
+    public String deleteUser(@RequestParam("userId") int id) {
+        userService.deleteUser(id);
         return "redirect:/";
     }
 }
