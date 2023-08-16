@@ -15,14 +15,14 @@ public class MyController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allEmps", allUsers);
         return "all-users";
     }
 
-    @GetMapping("/addNewUser")
+    @RequestMapping("/addNewUser")
     public String addNewUser(Model model) {
         User user = new User();
         user.setSalary(1000);
@@ -30,20 +30,26 @@ public class MyController {
         return "user-info";
     }
 
-    @PostMapping("/saveUser")
+    @RequestMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/";
     }
 
-    @GetMapping("/updateInfo")
-    public String updateUser(@RequestParam("empId") int id, Model model) {
-        User user = userService.getUser(id);
-        model.addAttribute("user", user);
-        return "user-info";
+    @RequestMapping("/updateUser")
+    public String saveUpdatedUser(@ModelAttribute("updatedUser") User user) {
+        userService.updateUser(user);
+        return "all-users";
     }
 
-    @GetMapping("/deleteUser")
+    @RequestMapping("/updateInfo")
+    public String updateUser(@RequestParam("empId") int id, Model model) {
+        User user = userService.getUser(id);
+        model.addAttribute("updatedUser", user);
+        return "user-update";
+    }
+
+    @RequestMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") int id) {
         userService.deleteUser(id);
         return "redirect:/";
