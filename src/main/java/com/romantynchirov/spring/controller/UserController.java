@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class MyController {
+public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allEmps", allUsers);
         return "all-users";
     }
 
-    @RequestMapping("/addNewUser")
+    @GetMapping("/addNewUser")
     public String addNewUser(Model model) {
         User user = new User();
         user.setSalary(1000);
@@ -30,26 +30,26 @@ public class MyController {
         return "user-info";
     }
 
-    @RequestMapping("/saveUser")
+    @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/";
     }
 
-    @RequestMapping("/saveUpdatedUser")
+    @PostMapping("/saveUpdatedUser")
     public String saveUpdatedUser(@ModelAttribute("updatedUser") User user) {
         userService.updateUser(user);
         return "redirect:/";
     }
 
-    @RequestMapping("/updateInfo")
+    @GetMapping("/updateInfo")
     public String updateInfo(@RequestParam("empId") int id, Model model) {
         User user = userService.getUser(id);
         model.addAttribute("updatedUser", user);
         return "user-update";
     }
 
-    @RequestMapping("/deleteUser")
+    @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") int id) {
         userService.deleteUser(id);
         return "redirect:/";
