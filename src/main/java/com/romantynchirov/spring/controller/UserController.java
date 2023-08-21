@@ -36,7 +36,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping("/saveUpdatedUser")
+    @PutMapping("/saveUpdatedUser")
     public String saveUpdatedUser(@ModelAttribute("updatedUser") User user) {
         userService.updateUser(user);
         return "redirect:/";
@@ -49,9 +49,10 @@ public class UserController {
         return "user-update";
     }
 
-    @GetMapping("/deleteUser")
+    @DeleteMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") int id) {
         userService.deleteUser(id);
         return "redirect:/";
     }
+
 }
